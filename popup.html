@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reelkeep</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><img src="icons/32.png" alt="" width="20" height="20"><span>Reelkeep</span></div>
+  <button class="icon-btn" id="openSettings" title="Settings" aria-label="Settings">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+  </button>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" id="tab-media" aria-selected="true" aria-controls="panel-media">On this page <span class="count" id="mediaCount"></span></button>
+  <button role="tab" id="tab-jobs" aria-selected="false" aria-controls="panel-jobs">Downloads <span class="count" id="jobsCount"></span></button>
+  <button role="tab" id="tab-library" aria-selected="false" aria-controls="panel-library">Library</button>
+</nav>
+
+<div class="banner" id="accessBanner" hidden>
+  <p><strong>Reelkeep needs access to websites</strong> to find videos. Your browser has it switched off.</p>
+  <button class="btn sm" id="grantAccess">Allow on all sites</button>
+</div>
+
+<main>
+  <section id="panel-media" role="tabpanel" aria-labelledby="tab-media">
+    <ul class="list" id="mediaList"></ul>
+    <div class="empty" id="mediaEmpty" hidden>
+      <p class="empty-title">No videos found yet</p>
+      <p>Press play on the video and keep this window open for a second.</p>
+      <p>Still nothing? <strong>Reload the page</strong> and play again. Videos that started before Reelkeep was installed or updated aren't seen until the page reloads.</p>
+      <p class="fine">DRM-protected services such as Netflix can’t be saved.</p>
+    </div>
+    <div class="empty" id="mediaBlocked" hidden>
+      <p class="empty-title">Paused on this site</p>
+      <p>This site is on your blocklist. Remove it in Settings to detect videos here.</p>
+    </div>
+  </section>
+
+  <section id="panel-jobs" role="tabpanel" aria-labelledby="tab-jobs" hidden>
+    <ul class="list" id="jobList"></ul>
+    <div class="empty" id="jobsEmpty" hidden>
+      <p class="empty-title">Nothing downloading</p>
+      <p>Downloads keep going after you close this window.</p>
+    </div>
+    <div class="footer-actions"><button class="btn ghost sm" id="clearJobs" hidden>Clear finished</button></div>
+  </section>
+
+  <section id="panel-library" role="tabpanel" aria-labelledby="tab-library" hidden>
+    <div class="search"><input type="search" id="librarySearch" placeholder="Search saved videos" aria-label="Search saved videos"></div>
+    <ul class="list" id="libraryList"></ul>
+    <div class="empty" id="libraryEmpty" hidden>
+      <p class="empty-title">Your library is empty</p>
+      <p>Everything you save appears here.</p>
+    </div>
+    <div class="footer-actions"><button class="btn ghost sm danger-text" id="clearLibrary" hidden>Clear library</button></div>
+  </section>
+</main>
+
+<script type="module" src="popup.js"></script>
+</body>
+</html>

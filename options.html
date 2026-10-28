@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reelkeep settings</title>
+<link rel="stylesheet" href="theme.css">
+<style>
+  body { padding: 32px 16px 64px; font-size: 14px; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  h1 { display: flex; align-items: center; gap: 10px; font-size: 22px; letter-spacing: -.01em; margin: 0 0 4px; }
+  .sub { color: var(--text-muted); margin: 0 0 24px; }
+  fieldset { border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); padding: 6px 18px; margin: 0 0 16px; }
+  legend { font-weight: 700; padding: 0 6px; }
+  .field { display: grid; grid-template-columns: 1fr 200px; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .field:last-child { border-bottom: 0; }
+  .field label { font-weight: 600; }
+  .field .hint { display: block; font-weight: 400; color: var(--text-muted); font-size: 12.5px; margin-top: 2px; }
+  .field select, .field input[type="text"], .field input[type="number"] { width: 100%; }
+  .field.stack { grid-template-columns: 1fr; gap: 8px; }
+  textarea { width: 100%; min-height: 96px; border: 1px solid var(--border-input); border-radius: var(--radius-sm); background: var(--surface); padding: 8px; font: 13px/1.5 var(--mono); color: var(--text); resize: vertical; }
+  input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); justify-self: end; }
+  .status { min-height: 20px; color: var(--accent); font-weight: 600; margin-top: 8px; }
+  .note { color: var(--text-muted); font-size: 12.5px; line-height: 1.55; margin-top: 24px; }
+  @media (max-width: 520px) { .field { grid-template-columns: 1fr; gap: 6px; } input[type="checkbox"] { justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><img src="icons/48.png" width="28" height="28" alt="">Reelkeep settings</h1>
+  <p class="sub">Changes save as you make them.</p>
+
+  <fieldset>
+    <legend>Saving</legend>
+    <div class="field">
+      <label for="defaultFormat">Default format<span class="hint">Pre-selected for every video. You can still change it per video.</span></label>
+      <select id="defaultFormat">
+        <option value="mp4">MP4 video</option>
+        <option value="mkv">MKV video</option>
+        <option value="mp3">MP3 audio</option>
+        <option value="m4a">M4A audio</option>
+        <option value="original">As is (no conversion)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="subfolder">Folder inside Downloads<span class="hint">Leave empty to save straight into Downloads.</span></label>
+      <input type="text" id="subfolder" placeholder="Reelkeep">
+    </div>
+    <div class="field">
+      <label for="saveAs">Ask where to save each file</label>
+      <input type="checkbox" id="saveAs">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Detection</legend>
+    <div class="field">
+      <label for="minSizeKB">Hide files smaller than (KB)<span class="hint">Skips short ad clips and previews. Streams are never hidden.</span></label>
+      <input type="number" id="minSizeKB" min="0" step="50">
+    </div>
+    <div class="field stack">
+      <label for="blocklist">Don’t detect on these sites<span class="hint">One site per line, e.g. example.com. Subdomains are included.</span></label>
+      <textarea id="blocklist" spellcheck="false"></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Appearance</legend>
+    <div class="field">
+      <label for="theme">Theme</label>
+      <select id="theme"><option value="system">Match system</option><option value="light">Light</option><option value="dark">Dark</option></select>
+    </div>
+    <div class="field">
+      <label for="badgeStyle">Toolbar badge</label>
+      <select id="badgeStyle"><option value="count">Number of videos</option><option value="dot">Dot</option></select>
+    </div>
+  </fieldset>
+
+  <div class="status" id="status" role="status" aria-live="polite"></div>
+  <p class="note">Reelkeep saves media your browser is already playing. DRM-protected streams (Netflix, Prime Video, Disney+ and similar) can’t be saved. Only save videos you have the right to keep.</p>
+</div>
+<script type="module" src="options.js"></script>
+</body>
+</html>
